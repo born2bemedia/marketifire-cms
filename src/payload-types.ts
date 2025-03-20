@@ -69,10 +69,7 @@ export interface Config {
     users: User;
     media: Media;
     policies: Policy;
-    categories: Category;
-    products: Product;
     orders: Order;
-    cases: Case;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -82,10 +79,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     policies: PoliciesSelect<false> | PoliciesSelect<true>;
-    categories: CategoriesSelect<false> | CategoriesSelect<true>;
-    products: ProductsSelect<false> | ProductsSelect<true>;
     orders: OrdersSelect<false> | OrdersSelect<true>;
-    cases: CasesSelect<false> | CasesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -196,49 +190,6 @@ export interface Policy {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: number;
-  title: string;
-  slug?: string | null;
-  description: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products".
- */
-export interface Product {
-  id: number;
-  title: string;
-  slug?: string | null;
-  icon?: (number | null) | Media;
-  price?: number | null;
-  category?: (number | null) | Category;
-  excerpt?: string | null;
-  color?: string | null;
-  includes?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "orders".
  */
 export interface Order {
@@ -247,7 +198,7 @@ export interface Order {
   user?: (number | null) | User;
   items?:
     | {
-        product: number | Product;
+        product_name: string;
         quantity: number;
         price: number;
         id?: string | null;
@@ -274,52 +225,6 @@ export interface Order {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "cases".
- */
-export interface Case {
-  id: number;
-  title: string;
-  slug?: string | null;
-  subtitle?: string | null;
-  thumbnail?: (number | null) | Media;
-  backgroundImage?: (number | null) | Media;
-  challenge?: string | null;
-  strategy?: string | null;
-  result?: string | null;
-  firstSection?: {
-    text?: string | null;
-    image?: (number | null) | Media;
-  };
-  secondSection?: {
-    text?: string | null;
-    subtitle?: string | null;
-  };
-  thirdSection: {
-    subtitle?: string | null;
-    strategies: {
-      icon?: (number | null) | Media;
-      subtitle: string;
-      text: string;
-      id?: string | null;
-    }[];
-  };
-  fourthSection?: {
-    text?: string | null;
-    subtitle?: string | null;
-  };
-  fifthSection?: {
-    subtitle?: string | null;
-    text?: string | null;
-  };
-  ctaSection?: {
-    subtitle?: string | null;
-    image?: (number | null) | Media;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -338,20 +243,8 @@ export interface PayloadLockedDocument {
         value: number | Policy;
       } | null)
     | ({
-        relationTo: 'categories';
-        value: number | Category;
-      } | null)
-    | ({
-        relationTo: 'products';
-        value: number | Product;
-      } | null)
-    | ({
         relationTo: 'orders';
         value: number | Order;
-      } | null)
-    | ({
-        relationTo: 'cases';
-        value: number | Case;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -451,33 +344,6 @@ export interface PoliciesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories_select".
- */
-export interface CategoriesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  description?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products_select".
- */
-export interface ProductsSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  icon?: T;
-  price?: T;
-  category?: T;
-  excerpt?: T;
-  color?: T;
-  includes?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "orders_select".
  */
 export interface OrdersSelect<T extends boolean = true> {
@@ -486,7 +352,7 @@ export interface OrdersSelect<T extends boolean = true> {
   items?:
     | T
     | {
-        product?: T;
+        product_name?: T;
         quantity?: T;
         price?: T;
         id?: T;
@@ -511,65 +377,6 @@ export interface OrdersSelect<T extends boolean = true> {
   documents?: T;
   invoice?: T;
   updatedAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "cases_select".
- */
-export interface CasesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  subtitle?: T;
-  thumbnail?: T;
-  backgroundImage?: T;
-  challenge?: T;
-  strategy?: T;
-  result?: T;
-  firstSection?:
-    | T
-    | {
-        text?: T;
-        image?: T;
-      };
-  secondSection?:
-    | T
-    | {
-        text?: T;
-        subtitle?: T;
-      };
-  thirdSection?:
-    | T
-    | {
-        subtitle?: T;
-        strategies?:
-          | T
-          | {
-              icon?: T;
-              subtitle?: T;
-              text?: T;
-              id?: T;
-            };
-      };
-  fourthSection?:
-    | T
-    | {
-        text?: T;
-        subtitle?: T;
-      };
-  fifthSection?:
-    | T
-    | {
-        subtitle?: T;
-        text?: T;
-      };
-  ctaSection?:
-    | T
-    | {
-        subtitle?: T;
-        image?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

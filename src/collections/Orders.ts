@@ -31,9 +31,9 @@ export const Orders: CollectionConfig = {
       label: 'Ordered Items',
       fields: [
         {
-          name: 'product',
-          type: 'relationship',
-          relationTo: 'products',
+          name: 'product_name',
+          type: 'text',
+          label: 'Product Name',
           required: true,
         },
         {

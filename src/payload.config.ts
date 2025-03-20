@@ -11,10 +11,7 @@ import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Policies } from './collections/Policies'
-import { Categories } from './collections/Categories'
-import { Products } from './collections/Products'
 import Orders from './collections/Orders'
-import { Cases } from './collections/Cases'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { google } from 'googleapis'
 
@@ -38,7 +35,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Policies, Categories, Products, Orders, Cases],
+  collections: [Users, Media, Policies, Orders],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
