@@ -63,8 +63,8 @@ export default buildConfig({
     }),
   ],
   email: nodemailerAdapter({
-    defaultFromName: 'Modulixo',
-    defaultFromAddress: 'noreply@3dellium.com',
+    defaultFromName: 'Marketifire',
+    defaultFromAddress: 'noreply@marketifire.com',
     transportOptions: {
       service: 'gmail',
       auth: {
