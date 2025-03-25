@@ -14,6 +14,7 @@ import { Policies } from './collections/Policies'
 import Orders from './collections/Orders'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { google } from 'googleapis'
+import { Insights } from './collections/Insights'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -35,7 +36,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Policies, Orders],
+  collections: [Users, Media, Policies, Orders, Insights],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
