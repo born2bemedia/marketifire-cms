@@ -214,6 +214,7 @@ export interface Order {
     email?: string | null;
     phone?: string | null;
     street?: string | null;
+    addressLine2?: string | null;
     city?: string | null;
     country?: string | null;
     zip?: string | null;
@@ -369,6 +370,7 @@ export interface OrdersSelect<T extends boolean = true> {
         email?: T;
         phone?: T;
         street?: T;
+        addressLine2?: T;
         city?: T;
         country?: T;
         zip?: T;

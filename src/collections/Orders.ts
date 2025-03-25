@@ -88,6 +88,7 @@ export const Orders: CollectionConfig = {
         { name: 'email', type: 'email', required: false },
         { name: 'phone', type: 'text', required: false },
         { name: 'street', type: 'text', required: false },
+        { name: 'addressLine2', type: 'text', required: false },
         { name: 'city', type: 'text', required: false },
         { name: 'country', type: 'text', required: false },
         { name: 'zip', type: 'text', required: false },
