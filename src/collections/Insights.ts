@@ -37,7 +37,7 @@ export const Insights: CollectionConfig = {
     },
     {
       name: 'excerpt',
-      type: 'text',
+      type: 'richText',
       label: 'Excerpt',
       localized: true,
     },
