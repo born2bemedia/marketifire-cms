@@ -18,26 +18,19 @@ export const Policies: CollectionConfig = {
       type: 'text',
       label: 'Title',
       required: true,
+      localized: true,
     },
     {
       name: 'slug',
       type: 'text',
       label: 'Slug',
       unique: true,
-      hooks: {
-        beforeChange: [
-          async ({ data }) => {
-            if (data?.title) {
-              return slugify(data.title, { lower: true, strict: true })
-            }
-          },
-        ],
-      },
     },
     {
       name: 'content',
       type: 'richText',
       label: 'Policy Content',
+      localized: true,
     },
   ],
 }
